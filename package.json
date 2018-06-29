@@ -1,0 +1,26 @@
+{
+    "name": "tools",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "dev": "NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "watch": "NODE_ENV=development node_modules/webpack/bin/webpack.js --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "hot": "NODE_ENV=development webpack-dev-server --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "production": "NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "browser-sync": "^2.24.5",
+        "browser-sync-webpack-plugin": "^2.0.1",
+        "laravel-mix": "^2.1.11"
+    },
+    "dependencies": {
+        "axios": "^0.18.0",
+        "lodash": "^4.17.10",
+        "materialize-css": "^1.0.0-rc.2",
+        "vue": "^2.5.16"
+    }
+}

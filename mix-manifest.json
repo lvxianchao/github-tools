@@ -1,0 +1,10 @@
+{
+    "/dist/js/search.js": "/dist/js/search.js",
+    "/dist/css/common.css": "/dist/css/common.css",
+    "/dist/notifications.html": "/dist/notifications.html",
+    "/dist/search.html": "/dist/search.html",
+    "/dist/settings.html": "/dist/settings.html",
+    "/dist/manifest.json": "/dist/manifest.json",
+    "/dist/js/background.js": "/dist/js/background.js",
+    "/dist/js/inject.js": "/dist/js/inject.js"
+}
