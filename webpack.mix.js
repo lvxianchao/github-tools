@@ -18,7 +18,11 @@ mix.copy(['src/*.html', 'src/*.json'], 'dist');
 mix.copy(['src/js/background.js', 'src/js/inject.js'], 'dist/js');
 
 mix.js('src/js/search.js', 'dist/js');
-mix.sass('src/sass/common.scss', 'dist/css');
+mix.sass('src/sass/common.scss', 'dist/css').options({
+    processCssUrls: false
+});
+
+
 
 mix.browserSync({
     proxy: undefined,
@@ -29,6 +33,8 @@ mix.browserSync({
         'dist/search.html'
     ]
 });
+
+
 
 // Full API
 // mix.js(src, output);

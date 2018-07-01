@@ -4,12 +4,12 @@
             <div class="row" id="search">
                 <div class="input-field col s12">
                     <github-icon-svg width="32" height="32" class="prefix"></github-icon-svg>
-                    <input type="text" id="autocomplete-input" class="autocomplete" autofocus v-model="keyword">
-                    <label for="autocomplete-input">Repositories</label>
+                    <input type="text" id="keywords" class="autocomplete" autofocus v-model.trim="keywords" @keyup.prevent="keyEvent">
+                    <label for="keywords">Repositories</label>
                 </div>
             </div>
 
-            <repositories :response="response"></repositories>
+            <repositories :response="response" ref="repository"></repositories>
         </div>
     </div>
 </template>
@@ -25,7 +25,7 @@
         },
         data() {
             return {
-                keyword: '',
+                keywords: '',
                 // 响应的结果
                 response: {},
                 // API 地址
@@ -39,7 +39,7 @@
         },
         watch: {
             // 监控关键字输入，做查询请求及图标转为等待。
-            keyword(newKeyword, oldKeyword) {
+            keywords(newKeyword, oldKeyword) {
                 this.debouncedQuery();
             }
         },
@@ -47,14 +47,50 @@
         methods: {
             // 发送查询请求
             query(page = 1, per_page = 10, sort = 'stars', order = 'desc') {
-                let url = `${this.api.repositories.search}?q=${this.keyword}&page=${page}&per_page=${per_page}&sort=${sort}&order=${order}`;
+                let url = `${this.api.repositories.search}?q=${this.keywords}&page=${page}&per_page=${per_page}&sort=${sort}&order=${order}`;
 
                 axios.get(url).then((response) => {
                     this.response = response.data;
-                    console.log(response);
                 }).catch((error) => {
                     this.error = 'Error! Could not reach the API. ' + error;
                 });
+            },
+            up() {
+                this.$refs.repository.up();
+            },
+            down() {
+                this.$refs.repository.down();
+            },
+            enter() {
+                this.$refs.repository.enter();
+            },
+            keyEvent(e) {
+                if (this.keywords) {
+                    switch (e.key) {
+                        case 'ArrowUp':
+                            this.up();
+                            break;
+                        case 'ArrowDown':
+                            this.down();
+                            break;
+                        case 'k':
+                            if (e.ctrlKey) {
+                                this.up();
+                            }
+                            break;
+                        case 'j':
+                            if (e.ctrlKey) {
+                                this.down();
+                            }
+                            break;
+                        case 'Enter':
+                            this.enter();
+                            break;
+                        default:
+                            break;
+                    }
+                }
+
             }
         },
 
@@ -64,3 +100,12 @@
         }
     }
 </script>
+
+<style lang="scss" scoped>
+    #search {
+        margin-bottom: 0;
+        .input-field {
+            margin-bottom: 0;
+        }
+    }
+</style>
